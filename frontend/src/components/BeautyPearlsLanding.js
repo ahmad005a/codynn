@@ -79,6 +79,7 @@ const BeautyPearlsLanding = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden bg-white/95 backdrop-blur-lg border-t border-gray-200"
           >
             <div className="px-4 py-4 space-y-3">
@@ -86,13 +87,24 @@ const BeautyPearlsLanding = () => {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="block text-gray-700 hover:text-rose-600 py-2 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-gray-700 hover:text-rose-600 py-2 font-medium transition-colors duration-200"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    setTimeout(() => {
+                      document.getElementById(item.toLowerCase())?.scrollIntoView({ 
+                        behavior: 'smooth' 
+                      });
+                    }, 100);
+                  }}
                 >
                   {item}
                 </a>
               ))}
-              <button className="w-full bg-gradient-to-r from-rose-600 to-purple-600 text-white py-3 rounded-full font-semibold">
+              <button 
+                className="w-full bg-gradient-to-r from-rose-600 to-purple-600 text-white py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-xl"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Book Consultation
               </button>
             </div>
